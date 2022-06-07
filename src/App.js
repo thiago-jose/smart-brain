@@ -9,8 +9,7 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import Register from './components/Register/Register'
 import './App.css';
 
-
-
+const BACKEND_SERVER_ADDRESS = "https://glacial-savannah-34527.herokuapp.com"
 
 const initialState = {
   input: '',
@@ -67,7 +66,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
-    fetch('http://localhost:3001/imageurl', {
+    fetch(`${BACKEND_SERVER_ADDRESS}/imageurl`, {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -77,7 +76,7 @@ class App extends Component {
     .then(respone => respone.json())
     .then(response => {
       if (response) {
-        fetch('http://localhost:3001/image', {
+        fetch(`${BACKEND_SERVER_ADDRESS}/image`, {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -120,8 +119,8 @@ class App extends Component {
           </div>
         : (
           this.state.route === 'signin'
-          ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-          : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} backend_server_address = {BACKEND_SERVER_ADDRESS}/>
+          : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} backend_server_address = {BACKEND_SERVER_ADDRESS}/>
           )
         }
       </div>  
