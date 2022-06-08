@@ -99,7 +99,7 @@ class App extends Component {
       this.setState({isSignedIn: true}) 
     }
     else {
-      this.setState({state: initialState})
+      this.setState({initialState})
     }
     this.setState({route: route})
   }  
